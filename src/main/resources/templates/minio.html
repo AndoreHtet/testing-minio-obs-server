@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>UploadPhotos</title>
+</head>
+<body>
+    <h1>Upload Photos</h1>
+    <form action="/upload-photos" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/**">
+        <button type="submit">Upload</button>
+    </form>
+
+    <div>
+        <ul>
+            <li th:each="objectName : ${objectNames}">
+                <img th:src="@{'https://uatobs.agb.com.mm:9000/sale-bucket/'+ ${objectName}}" alt="${objectName}">
+                <form th:action="@{'/delete-photo/' + ${objectName}}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+                <form th:action="@{'/edit-photo/' + ${objectName}}" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="image/**">
+                    <button type="submit">Edit</button>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+
+</body>
+</html>
